@@ -1,0 +1,105 @@
+
+:root {
+    --box-shadow: 0 8px 22px rgba(43, 42, 42, 0.2);
+}
+
+
+
+
+.hero {
+    background-image: url("../img/sample.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 5;
+}
+
+.hero::after {
+
+    content: "";
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(10, 20, 10, 0.4);
+    z-index: -1;
+
+
+}
+
+.display-4 {
+    font-weight: 400 !important;
+}
+
+section {
+    padding-top: 120px;
+    padding-bottom: 120px;
+
+}
+
+.card-effect {
+    box-shadow: var(--box-shadow);
+    background-color: #fff;
+    padding: 25px;
+    transition: all 0.35s ease;
+}
+
+.card-effect:hover {
+    box-shadow:  none;
+    transform: translateY(5px);
+}
+
+.iconbox {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    background-color: blue;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    border-radius: 100px;
+}
+
+.service {
+    position: relative;
+    overflow: hidden;
+
+}
+
+.service::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background-color: blue;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.35s ease;
+    z-index: -1;
+
+}
+.service:hover h5,
+.service:hover p {
+    color: white;
+}
+
+.service:hover .iconbox {
+    background-color: white;
+    color: blue;
+}
+
+
+.service:hover::after {
+    opacity: 1;
+    top: 0;
+
+}
+
+.footer a {
+    color: #fff;
+}
