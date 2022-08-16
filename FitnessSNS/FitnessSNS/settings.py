@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'SNSApp.apps.SnsappConfig',
+    'accounts.apps.AccountsConfig',
+    
 ]
 
 MIDDLEWARE = [
