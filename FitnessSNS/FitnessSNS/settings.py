@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from telnetlib import AUTHENTICATION
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +42,12 @@ INSTALLED_APPS = [
 
     'SNSApp.apps.SnsappConfig',
     'accounts.apps.AccountsConfig',
-    
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+
+
 ]
 
 MIDDLEWARE = [
@@ -136,3 +142,35 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#django-allauthで利用するdjango.contrib.sitesを使用するためのサイト識別ID
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    #一般ユーザー用のメールアドレス認証
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+    #管理サイト用のユーザー名認証
+    'django.contrib.auth.backends.ModelBackend',
+
+)
+
+#メールアドレス認証の設定
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+#リダイレクト先のURL
+LOGIN_REDIRECT_URL = 'SNSApp:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+
+#メールの送信元
+DEFAULT_FROM_EMAIL = 'yzhongtian194@gmail.com'
