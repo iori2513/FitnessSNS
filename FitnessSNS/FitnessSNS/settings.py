@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
 
+    'widget_tweaks',
+
 
 ]
 
