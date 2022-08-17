@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block body %}
 <!-- loader Start -->
@@ -47,24 +48,27 @@
           <div class="col-md-6 bg-white pt-5 pt-5 pb-lg-0 pb-5">
               <div class="sign-in-from">
                   <h1 class="mb-0">Sign in</h1>
-                  <p>Enter your email address and password to access admin panel.</p>
-                  <form class="mt-4">
-                      <div class="form-group">
-                          <label class="form-label" for="exampleInputEmail1">Email address</label>
-                          <input type="email" class="form-control mb-0" id="exampleInputEmail1" placeholder="Enter email">
-                      </div>
-                      <div class="form-group">
-                          <label class="form-label" for="exampleInputPassword1">Password</label>
-                          <a href="#" class="float-end">Forgot password?</a>
-                          <input type="password" class="form-control mb-0" id="exampleInputPassword1" placeholder="Password">
-                      </div>
-                      <div class="d-inline-block w-100">
-                          <div class="form-check d-inline-block mt-2 pt-1">
-                              <input type="checkbox" class="form-check-input" id="customCheck11">
-                              <label class="form-check-label" for="customCheck11">Remember Me</label>
+                  <p>Enter your email address and password to access admin panel.</p>                 
+                  <form class="mt-4" method="post" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        {% if field.label_tag == '<label for="id_remember">Remember Me:</label>' %}
+                        <div class="d-inline-block w-100">
+                            <div class="form-check d-inline-block mt-2 pt-1">
+                                {{ field | add_class:"form-check-input"}}
+                                <label class="form-check-label" for="customCheck11">{{ field.label_tag }}</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary float-end">Sign in</button>
+                        </div>
+                        {% else %}
+                          <div class="form-group">
+                              <label class="form-label" for="{{ field.id_for_label }}">
+                                {{ field.label_tag }}
+                              </label>
+                              {{ field | add_class:"form-control mb-0"}}
                           </div>
-                          <button type="submit" class="btn btn-primary float-end">Sign in</button>
-                      </div>
+                        {% endif %}
+                        {% endfor %}
                       <div class="sign-info">
                           <span class="dark-color d-inline-block line-height-2">Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></span>
                           <ul class="iq-social-media">
