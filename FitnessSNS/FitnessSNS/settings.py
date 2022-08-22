@@ -159,6 +159,8 @@ AUTHENTICATION_BACKENDS = (
 
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 #メールアドレス認証の設定
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
